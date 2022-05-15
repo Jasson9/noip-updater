@@ -8,5 +8,4 @@ setInterval(() => {
             console.log('updated')
         )
         .catch(err => console.log(err))
-    //console.log(myaccount.cookie)
 }, 120000);
