@@ -3,7 +3,6 @@ const { hazip } = require('./lib/hazip');
 const { cookieparser } = require('./lib/cookieparser');
 const { updatecookie } = require('./lib/updatecookie');
 const {getToken} = require('./lib/getToken')
-const fs = require('fs');
 /**
 * @typedef {data} data
 * @callback cb
@@ -43,7 +42,6 @@ class Account {
                 updatecookie(this.cookie)
                 .then(res => {
                     this.cookie = res;
-                    fs.writeFileSync('cookie.json',res)
                 })
             }, 600000);//1800000
         }
