@@ -1,8 +1,8 @@
 const fetch = require('node-fetch').default;
-const { hazip } = require('./hazip');
-const { cookieparser } = require('./cookieparser');
-const { updatecookie } = require('./updatecookie');
-const {getToken} = require('./getToken')
+const { hazip } = require('./lib/hazip');
+const { cookieparser } = require('./lib/cookieparser');
+const { updatecookie } = require('./lib/updatecookie');
+const {getToken} = require('./lib/getToken')
 /**
 * @typedef {data} data
 * @callback cb
@@ -39,8 +39,11 @@ class Account {
         }
         if (this.autoupdatecookie == true) {
             setInterval(() => {
-                updatecookie(this.cookie).then(res => this.cookie = res)
-            }, 5000);//1800000
+                updatecookie(this.cookie)
+                .then(res => {
+                    this.cookie = res;
+                })
+            }, 600000);//1800000
         }
     }
     /**
@@ -95,6 +98,7 @@ class Account {
             "body": null,
             "method": "GET"
         }).then(res => res.json())
+            .catch(err=>{throw err})
         return body
     }
 
@@ -118,7 +122,7 @@ class Account {
                     } else {
                         Resolve(JSON.parse(body));
                     }
-                }).catch(err => Reject(err))
+                }).catch(err => Reject(err));
         })
     }
 
