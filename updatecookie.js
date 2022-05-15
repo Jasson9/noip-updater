@@ -20,7 +20,8 @@ function updatecookie(cookie) {
             var cookie = res.headers.get('set-cookie');
             newcookie.push({ "name": 'XSRF-TOKEN', 'value': xsrfregex.exec(cookie)[1] });
             newcookie.push({ "name": 'laravel_session', 'value': lararegex.exec(cookie)[1] })
-            fs.writeFileSync('cookie.json', JSON.stringify(newcookie))
+            fs.writeFileSync('cookie.json', JSON.stringify(newcookie));
+            Resolve(newcookie);
         })
             .catch(err => Reject(err))
     })

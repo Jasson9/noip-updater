@@ -40,7 +40,7 @@ class Account {
         if (this.autoupdatecookie == true) {
             setInterval(() => {
                 updatecookie(this.cookie).then(res => this.cookie = res)
-            }, 5000);//1800000
+            }, 600000);//1800000
         }
     }
     /**
@@ -95,6 +95,7 @@ class Account {
             "body": null,
             "method": "GET"
         }).then(res => res.json())
+            .catch(err=>{throw err})
         return body
     }
 
@@ -118,7 +119,7 @@ class Account {
                     } else {
                         Resolve(JSON.parse(body));
                     }
-                }).catch(err => Reject(err))
+                }).catch(err => Reject(err));
         })
     }
 
