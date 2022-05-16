@@ -97,7 +97,14 @@ class Account {
             },
             "body": null,
             "method": "GET"
-        }).then(res => res.json())
+        }).then(res => res.text())
+        .then(body => {
+            if(body == 'Unauthorized.') {
+                throw 'Unauthorized';
+            } else {
+                return JSON.parse(body);
+            }
+        })
             .catch(err=>{throw err})
         return body
     }
